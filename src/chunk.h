@@ -10,10 +10,19 @@ typedef enum {
 } OpCode;
 
 typedef struct {
+    int offset;
+    int number;
+} LineStart;
+
+typedef struct {
     int count;
     int capacity;
     uint8_t *code;
-    int *lines;
+
+    int lines_count;
+    int lines_capacity;
+    LineStart *lines;
+
     ValueArray constants;
 } Chunk;
 
@@ -21,5 +30,6 @@ void init_chunk(Chunk *chunk);
 void free_chunk(Chunk *chunk);
 void write_chunk(Chunk *chunk, uint8_t byte, int line);
 int add_constant_to_chunk(Chunk *chunk, Value value);
+int instruction_line_from_chunk(Chunk *chunk, int instruction);
 
 #endif

@@ -12,6 +12,13 @@ int main(int argc, const char* argv[]) {
 
     write_chunk(&chunk, OP_RETURN, 123);
 
+    int const2 = add_constant_to_chunk(&chunk, 99);
+    write_chunk(&chunk, OP_CONSTANT, 124);
+    write_chunk(&chunk, const2, 124);
+
+    write_chunk(&chunk, OP_RETURN, 125);
+    write_chunk(&chunk, OP_RETURN, 125);
+
     disassemble_chunk(&chunk, "test chunk");
 
     free_chunk(&chunk);
