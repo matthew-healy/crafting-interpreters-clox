@@ -22,10 +22,9 @@ void write_value_array(ValueArray *array, Value value) {
             Value, array->values, 
             capacity_old, array->capacity
         );
-
-        array->values[array->count] = value;
-        array->count++;
     }
+    array->values[array->count] = value;
+    array->count++;
 }
 
 void print_value(Value value) {
