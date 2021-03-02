@@ -22,6 +22,22 @@ void free_chunk(Chunk *chunk) {
     init_chunk(chunk);
 }
 
+void write_constant_to_chunk(Chunk *chunk, Value value, int line) {
+    int index = add_constant_to_chunk(chunk, value);
+    if (index < 256) {
+        write_chunk(chunk, OP_CONSTANT, line);
+        write_chunk(chunk, (uint8_t)index, line);
+    } else {
+        write_chunk(chunk, OP_CONSTANT_LONG, line);
+        // &-ing an integer with 0xFF leaves only the least significant byte.
+        write_chunk(chunk, (uint8_t)(index & 0xff), line);
+        // (n >> 8) shifts the "middle" byte to the right, so &-ing leaves only that byte.
+        write_chunk(chunk, (uint8_t)((index >> 8) & 0xff), line);
+        // same as above, but 2 bytes
+        write_chunk(chunk, (uint8_t)((index >> 16) & 0xff), line);
+    }
+}
+
 void write_chunk(Chunk *chunk, uint8_t byte, int line) {
     if (chunk->capacity < chunk->count + 1) {
         int capacity_old = chunk->capacity;
