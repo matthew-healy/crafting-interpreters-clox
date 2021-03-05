@@ -6,6 +6,10 @@
 
 typedef enum {
     OP_CONSTANT, // Load a constant
+    OP_ADD,      // Add two numeric values
+    OP_SUBTRACT, // Subtract one numeric value from another
+    OP_MULTIPLY, // Multiply two numeric values
+    OP_DIVIDE,   // Divide one numeric value by another
     OP_NEGATE,   // Negate a numeric value
     OP_RETURN,   // Return from the current function
 } OpCode;
