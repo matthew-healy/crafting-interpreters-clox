@@ -88,11 +88,65 @@ int main(int argc, const char* argv[]) {
     // write_chunk(&chunk, OP_RETURN, 1);
 
     // 1 + 2 * 3 - 4 / -5
-    int constant = add_constant_to_chunk(&chunk, 1);
-    write_chunk(&chunk, OP_CONSTANT, 1);
-    write_chunk(&chunk, constant, 1);
+    // int constant = add_constant_to_chunk(&chunk, 1);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
 
-    constant = add_constant_to_chunk(&chunk, 2);
+    // constant = add_constant_to_chunk(&chunk, 2);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // constant = add_constant_to_chunk(&chunk, 3);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // write_chunk(&chunk, OP_MULTIPLY, 1);
+
+    // constant = add_constant_to_chunk(&chunk, 4);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // constant = add_constant_to_chunk(&chunk, 5);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // write_chunk(&chunk, OP_NEGATE, 1);
+
+    // write_chunk(&chunk, OP_DIVIDE, 1);
+
+    // write_chunk(&chunk, OP_SUBTRACT, 1);
+
+    // write_chunk(&chunk, OP_ADD, 1);
+
+    // write_chunk(&chunk, OP_RETURN, 1);
+
+    // 4 - 3 * -2 without using OP_NEGATE
+    // int constant = add_constant_to_chunk(&chunk, 4);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // constant = add_constant_to_chunk(&chunk, 3);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // write_chunk(&chunk, OP_SUBTRACT, 1);
+
+    // constant = add_constant_to_chunk(&chunk, 0);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // constant = add_constant_to_chunk(&chunk, 2);
+    // write_chunk(&chunk, OP_CONSTANT, 1);
+    // write_chunk(&chunk, constant, 1);
+
+    // write_chunk(&chunk, OP_SUBTRACT, 1);
+
+    // write_chunk(&chunk, OP_MULTIPLY, 1);
+
+    // write_chunk(&chunk, OP_RETURN, 1);
+
+    // 4 - 3 * -2 without using OP_SUBTRACT
+    int constant = add_constant_to_chunk(&chunk, 4);
     write_chunk(&chunk, OP_CONSTANT, 1);
     write_chunk(&chunk, constant, 1);
 
@@ -100,23 +154,17 @@ int main(int argc, const char* argv[]) {
     write_chunk(&chunk, OP_CONSTANT, 1);
     write_chunk(&chunk, constant, 1);
 
-    write_chunk(&chunk, OP_MULTIPLY, 1);
+    write_chunk(&chunk, OP_NEGATE, 1);
 
-    constant = add_constant_to_chunk(&chunk, 4);
-    write_chunk(&chunk, OP_CONSTANT, 1);
-    write_chunk(&chunk, constant, 1);
+    write_chunk(&chunk, OP_ADD, 1);
 
-    constant = add_constant_to_chunk(&chunk, 5);
+    constant = add_constant_to_chunk(&chunk, 2);
     write_chunk(&chunk, OP_CONSTANT, 1);
     write_chunk(&chunk, constant, 1);
 
     write_chunk(&chunk, OP_NEGATE, 1);
 
-    write_chunk(&chunk, OP_DIVIDE, 1);
-
-    write_chunk(&chunk, OP_SUBTRACT, 1);
-
-    write_chunk(&chunk, OP_ADD, 1);
+    write_chunk(&chunk, OP_MULTIPLY, 1);
 
     write_chunk(&chunk, OP_RETURN, 1);
 
