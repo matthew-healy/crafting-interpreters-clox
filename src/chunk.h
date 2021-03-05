@@ -6,7 +6,8 @@
 
 typedef enum {
     OP_CONSTANT, // Load a constant
-    OP_RETURN, // Return from the current function
+    OP_NEGATE,   // Negate a numeric value
+    OP_RETURN,   // Return from the current function
 } OpCode;
 
 typedef struct {
