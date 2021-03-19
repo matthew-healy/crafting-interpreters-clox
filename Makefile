@@ -2,6 +2,14 @@ BUILD_DIR := build
 
 default: clox
 
+repl-debug:
+	@ $(MAKE) debug \
+		&& build/cloxd
+
+repl:
+	@ $(MAKE) clox \
+		&& clox
+
 # Compile a debug build of clox
 debug:
 	@ $(MAKE) -f util/c.make NAME=cloxd MODE=debug SOURCE_DIR=src
