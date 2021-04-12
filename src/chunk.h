@@ -9,6 +9,9 @@ typedef enum {
     OP_NIL,      // Load nil
     OP_TRUE,     // Load true
     OP_FALSE,    // Load false
+    OP_EQUAL,    // Check if two values are equal
+    OP_GREATER,  // Check if one numeric value is greater than another
+    OP_LESS,     // Check if one numeric value is less than another
     OP_ADD,      // Add two numeric values
     OP_SUBTRACT, // Subtract one numeric value from another
     OP_MULTIPLY, // Multiply two numeric values

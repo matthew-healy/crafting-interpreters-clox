@@ -31,6 +31,14 @@ void init_vm() {
 
 void free_vm() {}
 
+static Value peek(int distance) {
+    return vm.stack_top[-1 - distance];
+}
+
+static bool is_falsey(Value value) {
+    return IS_NIL(value) || (IS_BOOL(value) && !AS_BOOL(value));
+}
+
 static InterpretResult run() {
     #define READ_BYTE() (*vm.ip++)
     #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
@@ -71,14 +79,23 @@ static InterpretResult run() {
             case OP_NIL: push(NIL_VAL); break;
             case OP_TRUE: push(BOOL_VAL(true)); break;
             case OP_FALSE: push(BOOL_VAL(false)); break;
+            case OP_EQUAL: {
+                Value b = pop();
+                Value a = pop();
+                push(BOOL_VAL(values_equal(a, b)));
+                break;
+            }
+            case OP_GREATER: BINARY_OP(BOOL_VAL, >); break;
+            case OP_LESS: BINARY_OP(BOOL_VAL, <); break;
             case OP_ADD: BINARY_OP(NUMBER_VAL, +); break;
             case OP_SUBTRACT: BINARY_OP(NUMBER_VAL, -); break;
             case OP_MULTIPLY: BINARY_OP(NUMBER_VAL, *); break;
             case OP_DIVIDE: BINARY_OP(NUMBER_VAL, /); break;
-            case OP_NOT:
+            case OP_NOT: {
                 push(BOOL_VAL(is_falsey(pop())));
                 break;
-            case OP_NEGATE:
+            }
+            case OP_NEGATE: {
                 if (!IS_NUMBER(peek(0))) {
                     runtime_error("Operand must be a number.");
                     return INTERPRET_RUNTIME_ERROR;
@@ -86,6 +103,7 @@ static InterpretResult run() {
 
                 push(NUMBER_VAL(-AS_NUMBER(pop())));
                 break;
+            }
             case OP_RETURN: {
                 print_value(pop());
                 printf("\n");
@@ -125,12 +143,4 @@ void push(Value value) {
 Value pop() {
     vm.stack_top--;
     return *vm.stack_top;
-}
-
-static Value peek(int distance) {
-    return vm.stack_top[-1 - distance];
-}
-
-static bool is_falsey(Value value) {
-    reutrn IS_NIL(value) || (IS_BOOL(value) && !AS_BOOL(value))
 }
