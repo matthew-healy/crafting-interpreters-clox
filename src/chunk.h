@@ -6,6 +6,9 @@
 
 typedef enum {
     OP_CONSTANT, // Load a constant
+    OP_NIL,      // Load nil
+    OP_TRUE,     // Load true
+    OP_FALSE,    // Load false
     OP_ADD,      // Add two numeric values
     OP_SUBTRACT, // Subtract one numeric value from another
     OP_MULTIPLY, // Multiply two numeric values
